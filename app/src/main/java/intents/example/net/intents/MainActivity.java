@@ -32,6 +32,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Button botonCorreo = (Button) findViewById(R.id.botoncorreo);
         botonCorreo.setOnClickListener(this);
+
+        Button botonBusqueda = (Button) findViewById(R.id.botonbusqueda);
+        botonBusqueda.setOnClickListener(this);
+
+        Button botonDialer = (Button) findViewById(R.id.botondialer);
+        botonDialer.setOnClickListener(this);
+
+        Button botonStreet = (Button) findViewById(R.id.botonstreetview);
+        botonStreet.setOnClickListener(this);
+
+        Button botonCompartir =(Button)findViewById(R.id.botoncompartir);
+        botonCompartir.setOnClickListener(this);
     }
 
     public void pgWeb(View view){
@@ -74,6 +86,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 new String[] {"smira@iesperemaria.com" });
         startActivity(intent);
     }
+    //Practica 3.27
+    public void busquedaWeb(View view){
+        Intent intent = new Intent(Intent.ACTION_WEB_SEARCH,
+                Uri.parse("https://www.google.es/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=%22IES+Pere+Maria+Orts"));
+        startActivity(intent);
+    }
+
+    public void dialerTelefono(View view){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (this.checkSelfPermission(
+                    Manifest.permission.CALL_PHONE) ==
+                    PackageManager.PERMISSION_GRANTED) {
+                Intent intent =
+                        new Intent(Intent.ACTION_CALL,Uri.parse(
+                                "tel:966870700"));
+                startActivity(intent);
+            }
+        } else {
+            Intent intent = new Intent(Intent.ACTION_CALL,
+                    Uri.parse("tel:966870700"));
+            startActivity(intent);
+        }
+    }
+
+    public void StreetView(View view){
+        Intent intent = new Intent(Intent.ACTION_VIEW,
+                Uri.parse("google.streetview:cbll=38.553468,-0.121579"));
+        intent.setPackage("com.google.android.apps.maps");
+        startActivity(intent);
+    }
+
+    public void CompartirCon(View view){
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, "Compartido desde IES Pere Maria Orts");
+        startActivity(Intent.createChooser(intent, "Compartir con ..."));
+    }
+
 
     @Override
     public void onClick(View view) {
@@ -92,6 +142,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.botoncorreo:
                 mandarCorreo(view);
+                break;
+            case R.id.botonbusqueda:
+                busquedaWeb(view);
+                break;
+            case R.id.botondialer:
+                dialerTelefono(view);
+                break;
+            case R.id.botonstreetview:
+                StreetView(view);
+                break;
+            case R.id.botoncompartir:
+                CompartirCon(view);
                 break;
         }
     }

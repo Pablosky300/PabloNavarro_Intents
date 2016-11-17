@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Intents</string>
+    <string name="busquedaweb">Busqueda web</string>
+    <string name="compartir">Compartir en ...</string>
+    <string name="dialertelefono">Dialer telefon</string>
+    <string name="googlemaps">Google maps</string>
+    <string name="hacerfoto">Fer foto</string>
+    <string name="llamadatel">Lamada de telefon</string>
+    <string name="mandarcorreo">Enviar correu</string>
+    <string name="paginaweb">Obrir página web</string>
+</resources>
