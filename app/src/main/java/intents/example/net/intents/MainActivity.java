@@ -1,6 +1,7 @@
 package intents.example.net.intents;
 
 import android.Manifest;
+import android.app.SearchManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -88,26 +89,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     //Practica 3.27
     public void busquedaWeb(View view){
-        Intent intent = new Intent(Intent.ACTION_WEB_SEARCH,
-                Uri.parse("https://www.google.es/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=%22IES+Pere+Maria+Orts"));
+        Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
+        intent.putExtra(SearchManager.QUERY , "IES Peremaria");
         startActivity(intent);
     }
 
     public void dialerTelefono(View view){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (this.checkSelfPermission(
-                    Manifest.permission.CALL_PHONE) ==
-                    PackageManager.PERMISSION_GRANTED) {
-                Intent intent =
-                        new Intent(Intent.ACTION_CALL,Uri.parse(
-                                "tel:966870700"));
-                startActivity(intent);
-            }
-        } else {
-            Intent intent = new Intent(Intent.ACTION_CALL,
-                    Uri.parse("tel:966870700"));
-            startActivity(intent);
-        }
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:966870700"));
+        startActivity(intent);
     }
 
     public void StreetView(View view){
@@ -119,9 +108,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void CompartirCon(View view){
         Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_TEXT, "Compartido desde IES Pere Maria Orts");
-        startActivity(Intent.createChooser(intent, "Compartir con ..."));
+        intent.setType("text/plain");
+        startActivity(Intent.createChooser(intent,"Compartir con ..."));
     }
 
 
